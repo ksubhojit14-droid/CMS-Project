@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Complaints | CMS</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0d6efd, #004ecb);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: white;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeDown 0.5s ease;
+            position: relative;
+        }
+
+        .header h2 {
+            font-weight: 700;
+        }
+
+        .wrapper {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .card-box {
+            background: white;
+            color: #333;
+            border: none;
+            border-radius: 15px;
+            padding: 22px;
+            margin-bottom: 18px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            transition: 0.3s;
+            animation: fadeUp 0.4s ease;
+        }
+
+        .card-box:hover {
+            transform: translateY(-6px);
+        }
+
+        .empty {
+            text-align: center;
+            padding: 50px;
+            background: white;
+            color: #333;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        .btn-delete {
+            color: #dc3545;
+            background: rgba(220, 53, 69, 0.1);
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+
+        .btn-delete:hover {
+            background: #dc3545;
+            color: white;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .badge-id {
+            background: #0d6efd;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .badge-status {
+            background: #ffc107;
+            color: #000;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <a href="dashboard.html" class="back-link">
+            <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
+        </a>
+
+        <div class="header">
+            <h2>
+                <i class="fas fa-list me-2"></i>
+                My Complaints
+            </h2>
+
+            <p class="text-white-50">
+                All your submitted complaints tracked in real-time
+            </p>
+        </div>
+
+        <div id="list"></div>
+
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function loadComplaints() {
+            const listDiv = document.getElementById("list");
+            let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+
+            if (complaints.length === 0) {
+                listDiv.innerHTML = `
+                    <div class="empty">
+                        <i class="fas fa-folder-open fs-1 text-muted mb-3"></i>
+                        <h4>No Complaints Found 😶</h4>
+                        <p class="text-muted mb-3">You haven't submitted any complaint yet.</p>
+                        <a href="submitcomplaint.html" class="btn btn-primary">Submit a Complaint</a>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = "";
+
+            // আসল Index ট্রাক করার জন্য reverse করার আগের Index সংরক্ষণ করা হয়েছে
+            [...complaints].reverse().forEach((c, index) => {
+                let originalIndex = complaints.length - 1 - index;
+
+                html += `
+                    <div class="card-box">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="fw-bold m-0 text-primary">${c.title || "No Title"}</h5>
+                            <div>
+                                <span class="badge-status me-2">Pending</span>
+                                <span class="badge-id text-white">#${originalIndex + 1}</span>
+                            </div>
+                        </div>
+
+                        <p class="mb-2">
+                            <strong><i class="fas fa-user me-1 text-muted"></i> Name:</strong> ${c.name || "Unknown"}
+                        </p>
+
+                        <p class="text-secondary mb-3">
+                            ${c.details || "No details available"}
+                        </p>
+
+                        <div class="d-flex justify-content-between align-items-center border-top pt-2">
+                            <small class="text-muted">
+                                <i class="fas fa-calendar-alt me-1"></i> ${c.date || "No date"}
+                            </small>
+                            <button class="btn-delete" onclick="deleteComplaint(${originalIndex})">
+                                <i class="fas fa-trash-alt me-1"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            listDiv.innerHTML = html;
+        }
+
+        function deleteComplaint(index) {
+            if (confirm("Are you sure you want to delete this complaint?")) {
+                let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+                complaints.splice(index, 1);
+                localStorage.setItem("complaints", JSON.stringify(complaints));
+                loadComplaints();
+            }
+        }
+
+        window.addEventListener("DOMContentLoaded", loadComplaints);
+    </script>
+
+</body>
+
+</html>

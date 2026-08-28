@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Complaint | CMS</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0d6efd, #004ecb);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* FORM BOX */
+        .complaint-box {
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+            animation: fadeIn 0.6s ease-in-out;
+            position: relative;
+        }
+
+        .complaint-box h2 {
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #0d6efd;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            padding: 10px 14px;
+        }
+
+        .form-control:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 10px rgba(13, 110, 253, 0.3);
+        }
+
+        /* BUTTON */
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #004ecb;
+            transform: scale(1.02);
+        }
+
+        .back-dashboard {
+            display: inline-block;
+            margin-bottom: 15px;
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .back-dashboard:hover {
+            color: #0d6efd;
+        }
+
+        /* TOAST */
+        .toast-box {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #198754;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: 0.4s;
+            z-index: 1000;
+        }
+
+        .toast-box.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- TOAST -->
+    <div id="toast" class="toast-box">
+        <i class="fas fa-check-circle me-2"></i> Complaint Submitted Successfully!
+    </div>
+
+    <!-- FORM -->
+    <div class="complaint-box">
+
+        <a href="dashboard.html" class="back-dashboard">
+            <i class="fas fa-arrow-left me-1"></i> Back to Dashboard
+        </a>
+
+        <h2><i class="fas fa-pen-to-square me-2"></i>Submit Complaint</h2>
+
+        <form onsubmit="return submitComplaint(event)">
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Full Name</label>
+                <input id="name" type="text" class="form-control" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="title" class="form-label">Complaint Title</label>
+                <input id="title" type="text" class="form-control" placeholder="Brief subject of issue" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="details" class="form-label">Complaint Details</label>
+                <textarea id="details" class="form-control" rows="4" placeholder="Describe your issue in detail..."
+                    required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-2">Submit Complaint</button>
+
+        </form>
+
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function submitComplaint(event) {
+            if (event) event.preventDefault();
+
+            let name = document.getElementById("name").value;
+            let title = document.getElementById("title").value;
+            let details = document.getElementById("details").value;
+
+            let complaint = {
+                name: name,
+                title: title,
+                details: details,
+                date: new Date().toLocaleString()
+            };
+
+            let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+            complaints.push(complaint);
+            localStorage.setItem("complaints", JSON.stringify(complaints));
+
+            // show toast
+            let toast = document.getElementById("toast");
+            toast.classList.add("show");
+
+            // redirect AFTER toast
+            setTimeout(() => {
+                window.location.href = "mycomplaints.html";
+            }, 1200);
+
+            return false;
+        }
+    </script>
+
+</body>
+
+</html>

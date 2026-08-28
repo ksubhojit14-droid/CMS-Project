@@ -1,0 +1,98 @@
+< !DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Home | Complaint Management System</title>< !-- Bootstrap CSS --><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">< !-- Google Font --><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">< !-- Font Awesome Icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><style>body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0d6efd, #004ecb) !important;
+    min-height: 100vh;
+}
+
+/* NAVBAR */
+.navbar {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.navbar-brand,
+.nav-link {
+    color: white !important;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    opacity: 0.8;
+}
+
+/* HERO */
+.hero {
+    padding: 100px 0 80px;
+    color: white;
+}
+
+.hero h1 {
+    font-size: 54px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* IMAGE ANIMATION */
+.hero-img {
+    animation: float 3s ease-in-out infinite;
+    max-width: 100%;
+    height: auto;
+}
+
+/* STATS */
+.stats-box {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* FEATURES */
+.feature-card {
+    background: white;
+    border-radius: 18px;
+    transition: 0.3s;
+    border: none;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* FOOTER */
+.footer {
+    background: #212529;
+    color: #adb5bd;
+}
+
+/* FLOAT ANIMATION */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero {
+        padding: 60px 0 40px;
+        text-align: center;
+    }
+}
+
+</style></head><body>< !-- NAVBAR --><nav class="navbar navbar-expand-lg navbar-dark py-3"><div class="container"><a class="navbar-brand fw-bold fs-4" href="index.html"><i class="fas fa-shield-alt me-2"></i>CMS Portal </a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarNav"><ul class="navbar-nav ms-auto align-items-center"><li class="nav-item me-3"><a class="nav-link active" href="index.html">Home</a></li><li class="nav-item me-3"><a class="nav-link" href="dashboard.html">Dashboard</a></li><li class="nav-item me-3"><a class="nav-link" href="mycomplaints.html">My Complaints</a></li><li class="nav-item me-3"><a class="btn btn-light text-primary fw-semibold px-4 rounded-pill" href="submitcomplaint.html"><i class="fas fa-plus-circle me-1"></i>Submit Complaint </a></li><li class="nav-item"><a class="btn btn-outline-light px-4 rounded-pill" href="login.html">Login</a></li></ul></div></div></nav>< !-- HERO SECTION --><section class="hero"><div class="container"><div class="row align-items-center g-5"><div class="col-lg-6"><h1 class="mb-4">Fast & Transparent Complaint Resolution</h1><p class="fs-5 text-white-50 mb-4">Easily register your issues,
+track resolution progress in real-time,
+and get your problems solved efficiently with our Complaint Management System. </p><div class="d-flex gap-3 flex-wrap"><a href="submitcomplaint.html" class="btn btn-light btn-lg text-primary fw-bold px-4 rounded-pill">Submit Complaint Now </a><a href="dashboard.html" class="btn btn-outline-light btn-lg px-4 rounded-pill">View Dashboard </a></div></div><div class="col-lg-6 text-center"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="CMS Banner" class="hero-img img-fluid" style="max-height: 380px;"></div></div></div></section>< !-- STATS SECTION --><section class="pb-5"><div class="container"><div class="stats-box"><div class="row text-center g-4"><div class="col-md-4"><i class="fas fa-file-alt fs-1 text-primary mb-2"></i><h2 class="fw-bold text-dark m-0">500+</h2><p class="text-muted m-0">Total Complaints Registered</p></div><div class="col-md-4"><i class="fas fa-check-circle fs-1 text-success mb-2"></i><h2 class="fw-bold text-dark m-0">450+</h2><p class="text-muted m-0">Successfully Resolved</p></div><div class="col-md-4"><i class="fas fa-user-clock fs-1 text-warning mb-2"></i><h2 class="fw-bold text-dark m-0">24/7</h2><p class="text-muted m-0">Active Support & Tracking</p></div></div></div></div></section>< !-- FEATURES SECTION --><section class="py-5"><div class="container"><div class="text-center text-white mb-5"><h2 class="fw-bold">Why Use Our CMS?</h2><p class="text-white-50">Designed for fast,
+easy,
+and seamless complaint handling</p></div><div class="row g-4"><div class="col-md-4"><div class="card feature-card p-4 text-center h-100"><div class="fs-1 text-primary mb-3"><i class="fas fa-bolt"></i></div><h4 class="fw-bold text-dark">Quick Submission</h4><p class="text-muted">Fill up a simple form and post your issue instantly without complicated procedures.</p></div></div><div class="col-md-4"><div class="card feature-card p-4 text-center h-100"><div class="fs-1 text-primary mb-3"><i class="fas fa-spinner"></i></div><h4 class="fw-bold text-dark">Live Status Tracking</h4><p class="text-muted">Monitor whether your complaint is pending or resolved directly from your dashboard.</p></div></div><div class="col-md-4"><div class="card feature-card p-4 text-center h-100"><div class="fs-1 text-primary mb-3"><i class="fas fa-lock"></i></div><h4 class="fw-bold text-dark">Safe & Local Storage</h4><p class="text-muted">All your data is saved securely and accessible from your browser anytime.</p></div></div></div></div></section>< !-- FOOTER --><footer class="footer py-4 text-center"><div class="container"><p class="mb-0">© 2026 Complaint Management System. All Rights Reserved.</p></div></footer>< !-- Bootstrap JS Bundle --><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script></body></html>

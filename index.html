@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Complaint Management System</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Custom External CSS File Link -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8faff;
+            color: #212529;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================== */
+
+        .navbar {
+            padding: 16px 0;
+            background: rgba(13, 110, 253, 0.92) !important;
+            backdrop-filter: blur(15px);
+            transition: 0.4s;
+        }
+
+        .navbar-brand {
+            font-size: 1.35rem;
+            letter-spacing: 0.3px;
+        }
+
+        .navbar-brand i {
+            margin-right: 8px;
+        }
+
+        .nav-btn {
+            border-radius: 50px;
+            padding: 9px 22px;
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 70%, rgba(255, 255, 255, 0.12), transparent 25%),
+                linear-gradient(135deg, #0d6efd, #0043a8);
+            color: white;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            top: -150px;
+            left: -120px;
+            animation: floatingCircle 8s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            bottom: -150px;
+            right: -100px;
+            animation: floatingCircle 10s ease-in-out infinite reverse;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: heroLeft 1s ease;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.3rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #ffc107;
+        }
+
+        .hero-text {
+            font-size: 1.08rem;
+            line-height: 1.8;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            margin-top: 35px;
+        }
+
+        .hero-btn {
+            border-radius: 50px;
+            padding: 13px 28px;
+            font-weight: 600;
+            transition: 0.35s;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* =========================
+           HERO IMAGE
+        ========================== */
+
+        .hero-visual {
+            position: relative;
+            z-index: 2;
+            animation: heroRight 1s ease;
+        }
+
+        .hero-img-wrapper {
+            width: 420px;
+            height: 420px;
+            max-width: 90vw;
+            margin: auto;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.2);
+            animation: floating 5s ease-in-out infinite;
+        }
+
+        .hero-img {
+            width: 310px;
+            max-width: 75%;
+            filter: drop-shadow(0 20px 20px rgba(0, 0, 0, 0.2));
+        }
+
+        /* =========================
+           STATS
+        ========================== */
+
+        .stats-section {
+            margin-top: -70px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .stats-box {
+            background: white;
+            border-radius: 25px;
+            padding: 35px 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.10);
+        }
+
+        .stat-item {
+            position: relative;
+        }
+
+        .stat-icon {
+            width: 65px;
+            height: 65px;
+            margin: auto;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: #eef5ff;
+            color: #0d6efd;
+            transition: 0.4s;
+        }
+
+        .stat-item:hover .stat-icon {
+            transform: rotateY(180deg);
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-top: 10px;
+        }
+
+        /* =========================
+           SECTION
+        ========================== */
+
+        .section-title {
+            font-weight: 800;
+            font-size: 2.3rem;
+        }
+
+        .section-subtitle {
+            color: #6c757d;
+        }
+
+        /* =========================
+           FEATURE CARDS
+        ========================== */
+
+        .feature-card {
+            border: none;
+            border-radius: 22px;
+            padding: 35px 25px !important;
+            background: white;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.07);
+            transition: 0.4s;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .feature-card::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            top: 0;
+            left: -100%;
+            background: linear-gradient(90deg, #0d6efd, #ffc107);
+            transition: 0.5s;
+        }
+
+        .feature-card:hover::before {
+            left: 0;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: auto;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            background: #eef5ff;
+            color: #0d6efd;
+            transition: 0.4s;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* =========================
+           HOW IT WORKS
+        ========================== */
+
+        .steps-section {
+            background: linear-gradient(135deg, #f0f6ff, #ffffff);
+        }
+
+        .step-card {
+            text-align: center;
+            position: relative;
+            padding: 30px 20px;
+        }
+
+        .step-number {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: #0d6efd;
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            box-shadow: 0 10px 25px rgba(13, 110, 253, 0.3);
+            transition: 0.4s;
+        }
+
+        .step-card:hover .step-number {
+            transform: scale(1.15);
+        }
+
+        .step-icon {
+            font-size: 2rem;
+            color: #0d6efd;
+            margin: 20px 0 10px;
+        }
+
+        /* =========================
+           CTA
+        ========================== */
+
+        .cta {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0d6efd, #003b95);
+            border-radius: 30px;
+            color: white;
+            padding: 70px 30px;
+            box-shadow: 0 25px 60px rgba(13, 110, 253, 0.25);
+        }
+
+        .cta::before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            top: -150px;
+            right: -80px;
+        }
+
+        .cta h2 {
+            font-weight: 800;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta p {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta .btn {
+            position: relative;
+            z-index: 2;
+            border-radius: 50px;
+            padding: 13px 30px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .cta .btn:hover {
+            transform: translateY(-4px);
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            background: #071a36;
+            color: white;
+            padding: 55px 20px 25px;
+        }
+
+        .footer-logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .footer-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.08);
+            margin: 5px;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-icon:hover {
+            background: #0d6efd;
+            transform: translateY(-5px);
+            color: white;
+        }
+
+        /* =========================
+           SCROLL ANIMATION
+        ========================== */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================
+           ANIMATIONS
+        ========================== */
+
+        @keyframes floating {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-18px);
+            }
+
+        }
+
+        @keyframes floatingCircle {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(30px, 30px);
+            }
+
+        }
+
+        @keyframes heroLeft {
+
+            from {
+                opacity: 0;
+                transform: translateX(-60px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+        }
+
+        @keyframes heroRight {
+
+            from {
+                opacity: 0;
+                transform: translateX(60px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+        }
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 768px) {
+
+            .hero {
+                min-height: auto;
+                padding: 100px 0 130px;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-text {
+                margin: auto;
+            }
+
+            .hero-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                align-items: center;
+            }
+
+            .hero-img-wrapper {
+                width: 300px;
+                height: 300px;
+                margin-top: 50px;
+            }
+
+            .stats-section {
+                margin-top: -50px;
+            }
+
+            .stats-box {
+                margin: 0 15px;
+            }
+
+            .stat-item {
+                padding: 15px;
+            }
+
+            .section-title {
+                font-size: 1.9rem;
+            }
+
+            .cta {
+                border-radius: 20px;
+                padding: 50px 20px;
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+     NAVBAR
+========================== -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+
+        <div class="container">
+
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="fas fa-shield-halved"></i>
+                Complaint System
+            </a>
+
+            <div class="d-flex">
+
+                <a href="login.html" class="btn btn-outline-light nav-btn me-2">
+                    <i class="fas fa-right-to-bracket me-1"></i>
+                    Login
+                </a>
+
+                <a href="register.html" class="btn btn-warning nav-btn fw-bold">
+                    <i class="fas fa-user-plus me-1"></i>
+                    Register
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+     HERO
+========================== -->
+
+    <section class="hero d-flex align-items-center">
+
+        <div class="container">
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-6 hero-content">
+
+                    <span class="badge bg-warning text-dark rounded-pill px-3 py-2 mb-3">
+                        <i class="fas fa-bolt"></i>
+                        Fast & Easy Complaint Management
+                    </span>
+
+                    <h1>
+                        Your Voice.
+                        <span>Your Solution.</span>
+                    </h1>
+
+                    <p class="hero-text text-white-50">
+
+                        Submit complaints online, track your complaint status,
+                        communicate easily and get faster resolutions —
+                        all from one simple platform.
+
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <a href="login.html" class="btn btn-light hero-btn text-primary me-2">
+
+                            <i class="fas fa-paper-plane me-2"></i>
+                            Submit Complaint
+
+                        </a>
+
+                        <a href="register.html" class="btn btn-warning hero-btn">
+
+                            <i class="fas fa-user-plus me-2"></i>
+                            Create Account
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-6 hero-visual">
+
+                    <div class="hero-img-wrapper">
+
+                        <img src="https://cdn-icons-png.flaticon.com/512/4341/4341139.png" class="img-fluid hero-img"
+                            alt="Complaint Management">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+     STATS
+========================== -->
+
+    <section class="stats-section">
+
+        <div class="container">
+
+            <div class="stats-box">
+
+                <div class="row text-center g-4">
+
+                    <div class="col-md-4 stat-item">
+
+                        <div class="stat-icon">
+                            <i class="fas fa-file-circle-plus"></i>
+                        </div>
+
+                        <div class="stat-number text-primary">
+                            <span class="counter" data-target="500">0</span>+
+                        </div>
+
+                        <p class="text-muted mb-0">
+                            Complaints Submitted
+                        </p>
+
+                    </div>
+
+
+                    <div class="col-md-4 stat-item">
+
+                        <div class="stat-icon">
+                            <i class="fas fa-circle-check"></i>
+                        </div>
+
+                        <div class="stat-number text-success">
+                            <span class="counter" data-target="450">0</span>+
+                        </div>
+
+                        <p class="text-muted mb-0">
+                            Issues Resolved
+                        </p>
+
+                    </div>
+
+
+                    <div class="col-md-4 stat-item">
+
+                        <div class="stat-icon">
+                            <i class="fas fa-face-smile"></i>
+                        </div>
+
+                        <div class="stat-number text-danger">
+                            <span class="counter" data-target="98">0</span>%
+                        </div>
+
+                        <p class="text-muted mb-0">
+                            User Satisfaction
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+     FEATURES
+========================== -->
+
+    <section class="container py-5 my-5">
+
+        <div class="text-center mb-5 reveal">
+
+            <span class="text-primary fw-bold">
+                WHY CHOOSE US
+            </span>
+
+            <h2 class="section-title mt-2">
+                Everything You Need
+            </h2>
+
+            <p class="section-subtitle">
+                A smarter and simpler way to manage complaints.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <div class="col-md-4 reveal">
+
+                <div class="feature-card h-100 text-center">
+
+                    <div class="feature-icon">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+
+                    <h4 class="fw-bold mt-4">
+                        Easy Submission
+                    </h4>
+
+                    <p class="text-muted mt-3">
+
+                        Submit your complaint quickly with
+                        an easy-to-use online form.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4 reveal">
+
+                <div class="feature-card h-100 text-center">
+
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+
+                    <h4 class="fw-bold mt-4">
+                        Track Progress
+                    </h4>
+
+                    <p class="text-muted mt-3">
+
+                        Track your complaint status and
+                        know exactly what is happening.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4 reveal">
+
+                <div class="feature-card h-100 text-center">
+
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
+
+                    <h4 class="fw-bold mt-4">
+                        Secure System
+                    </h4>
+
+                    <p class="text-muted mt-3">
+
+                        Your complaint information is
+                        organized and protected.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+     HOW IT WORKS
+========================== -->
+
+    <section class="steps-section py-5">
+
+        <div class="container py-5">
+
+            <div class="text-center mb-5 reveal">
+
+                <span class="text-primary fw-bold">
+                    SIMPLE PROCESS
+                </span>
+
+                <h2 class="section-title mt-2">
+                    How It Works
+                </h2>
+
+                <p class="section-subtitle">
+                    Three simple steps to submit and track your complaint.
+                </p>
+
+            </div>
+
+
+            <div class="row g-4">
+
+
+                <div class="col-md-4 reveal">
+
+                    <div class="step-card">
+
+                        <div class="step-number">
+                            01
+                        </div>
+
+                        <div class="step-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+
+                        <h4 class="fw-bold">
+                            Register
+                        </h4>
+
+                        <p class="text-muted">
+                            Create your account in just a few seconds.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4 reveal">
+
+                    <div class="step-card">
+
+                        <div class="step-number">
+                            02
+                        </div>
+
+                        <div class="step-icon">
+                            <i class="fas fa-file-pen"></i>
+                        </div>
+
+                        <h4 class="fw-bold">
+                            Submit Complaint
+                        </h4>
+
+                        <p class="text-muted">
+                            Provide the required details and submit your issue.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4 reveal">
+
+                    <div class="step-card">
+
+                        <div class="step-number">
+                            03
+                        </div>
+
+                        <div class="step-icon">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+
+                        <h4 class="fw-bold">
+                            Track & Resolve
+                        </h4>
+
+                        <p class="text-muted">
+                            Track the status and wait for the resolution.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+     CTA
+========================== -->
+
+    <section class="container my-5 py-5">
+
+        <div class="cta text-center reveal">
+
+            <h2 class="display-6">
+                Have a Problem?
+            </h2>
+
+            <p class="text-white-50 mt-3">
+                Don't wait. Submit your complaint and let us help you.
+            </p>
+
+            <a href="login.html" class="btn btn-light text-primary mt-3">
+
+                <i class="fas fa-arrow-right me-2"></i>
+                Get Started Now
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+     FOOTER
+========================== -->
+
+    <footer>
+
+        <div class="container text-center">
+
+            <div class="footer-logo mb-3">
+
+                <i class="fas fa-shield-halved me-2"></i>
+                Complaint Management System
+
+            </div>
+
+            <p class="text-white-50">
+                A modern platform for simple and efficient complaint management.
+            </p>
+
+
+            <div class="my-4">
+
+                <a href="#" class="footer-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+
+                <a href="#" class="footer-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+
+                <a href="#" class="footer-icon">
+                    <i class="fab fa-github"></i>
+                </a>
+
+                <a href="#" class="footer-icon">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+
+            </div>
+
+
+            <hr class="border-secondary">
+
+
+            <p class="text-white-50 mb-0">
+
+                © 2026 Complaint Management System
+                | BCA Project
+                | Designed for Learning Purpose
+
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================
+     JAVASCRIPT
+========================== -->
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+
+        /* =========================
+           SCROLL REVEAL
+        ========================== */
+
+        const reveals = document.querySelectorAll(".reveal");
+
+        function revealOnScroll() {
+
+            reveals.forEach(element => {
+
+                const windowHeight = window.innerHeight;
+
+                const elementTop =
+                    element.getBoundingClientRect().top;
+
+                if (elementTop < windowHeight - 100) {
+
+                    element.classList.add("active");
+
+                }
+
+            });
+
+        }
+
+        window.addEventListener("scroll", revealOnScroll);
+
+        revealOnScroll();
+
+
+        /* =========================
+           COUNTER ANIMATION
+        ========================== */
+
+        const counters =
+            document.querySelectorAll(".counter");
+
+        let counterStarted = false;
+
+        function startCounters() {
+
+            const statsSection =
+                document.querySelector(".stats-section");
+
+            const sectionTop =
+                statsSection.getBoundingClientRect().top;
+
+            if (
+                sectionTop < window.innerHeight &&
+                !counterStarted
+            ) {
+
+                counterStarted = true;
+
+                counters.forEach(counter => {
+
+                    const target =
+                        Number(counter.dataset.target);
+
+                    let current = 0;
+
+                    const increment =
+                        target / 80;
+
+                    function updateCounter() {
+
+                        current += increment;
+
+                        if (current < target) {
+
+                            counter.innerText =
+                                Math.ceil(current);
+
+                            requestAnimationFrame(updateCounter);
+
+                        } else {
+
+                            counter.innerText = target;
+
+                        }
+
+                    }
+
+                    updateCounter();
+
+                });
+
+            }
+
+        }
+
+        window.addEventListener("scroll", startCounters);
+
+        startCounters();
+
+
+        /* =========================
+           NAVBAR EFFECT
+        ========================== */
+
+        window.addEventListener("scroll", function () {
+
+            const navbar =
+                document.querySelector(".navbar");
+
+            if (window.scrollY > 50) {
+
+                navbar.style.padding = "10px 0";
+
+            } else {
+
+                navbar.style.padding = "16px 0";
+
+            }
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>
